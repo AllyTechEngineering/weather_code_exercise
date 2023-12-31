@@ -72,7 +72,9 @@ openWeather has deprecated using City and Country for weather look up and need l
 
 ## To run the project:
 - in VS Code use debug and it will run the launch.json for debug, profile or release
-- in Android Studio select the emulator and use Debug 'main.dart'
+- in Android Studio select the emulator and use Run or Debug 'main.dart'
+- apk files are in weather_code_exercise/build/app/outputs/flutter-apk/
+
 
 ## Know issues and TODO:
 - This project was original for searching for city weather. I refactored to add the local weather as per the requirements. 
