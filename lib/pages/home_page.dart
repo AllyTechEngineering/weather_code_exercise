@@ -4,7 +4,7 @@ import 'package:open_weather_stream_bloc/utilities/show_wind_direction.dart';
 // import 'package:open_weather_stream_bloc/utilities/calculate_font_size_class.dart';
 import 'package:recase/recase.dart';
 import '../utilities/constants.dart';
-import '../blocs/blocs.dart';
+import '../blocs/barrel_blocs.dart';
 import '../utilities/show_temperature_and_wind.dart';
 import '../widgets/error_dialog.dart';
 import 'search_page.dart';
@@ -74,12 +74,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   String showTemperature(double temperature) {
-    final tempUnit = context.watch<TempSettingsBloc>().state.tempUnit;
+    final tempUnit = context.watch<TempSettingsBloc>().state.temperatureUnit;
     return showTemperatureAndWindClass.showTemperatureResults(temperature, tempUnit);
   }
 
   String showWindSpeed(double windSpeed) {
-    final tempUnit = context.watch<TempSettingsBloc>().state.tempUnit;
+    final tempUnit = context.watch<TempSettingsBloc>().state.temperatureUnit;
     return showTemperatureAndWindClass.showWindSpeedResults(windSpeed, tempUnit);
   }
 
@@ -104,12 +104,13 @@ class _HomePageState extends State<HomePage> {
   Widget _showWeather() {
     return BlocConsumer<WeatherBloc, WeatherState>(
       listener: (context, state) {
-        if (state.status == WeatherStatus.error) {
-          errorDialog(context, state.error.errMsg);
+        if (state.statusProperty == WeatherStatus.errorStatus) {
+          errorDialog(
+              context, state.errorProperty.customErrorMessage); //errMsg is in customer_error.dart
         }
       },
       builder: (context, state) {
-        if (state.status == WeatherStatus.initial) {
+        if (state.statusProperty == WeatherStatus.initialStatus) {
           return Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -149,13 +150,14 @@ class _HomePageState extends State<HomePage> {
           );
         }
 
-        if (state.status == WeatherStatus.loading) {
+        if (state.statusProperty == WeatherStatus.loadingStatus) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
-        if (state.status == WeatherStatus.error && state.weather.name == '') {
+        if (state.statusProperty == WeatherStatus.errorStatus &&
+            state.weatherProperty.nameWeather == '') {
           return Center(
             child: Text(
               'Select a city',
@@ -177,13 +179,13 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.height / 20,
               ),
               Text(
-                state.weather.name,
+                state.weatherProperty.nameWeather,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(width: 8.0),
               Text(
-                'Country: ${state.weather.country}',
+                'Country: ${state.weatherProperty.countryWeather}',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.displayMedium,
               ),
@@ -192,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Your Time: ${TimeOfDay.fromDateTime(state.weather.lastUpdated).format(context)}',
+                    'Your Time: ${TimeOfDay.fromDateTime(state.weatherProperty.lastUpdatedWeather).format(context)}',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
@@ -209,19 +211,19 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Now: ${showTemperature(state.weather.temp)}',
+                    'Now: ${showTemperature(state.weatherProperty.tempWeather)}',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(width: 20.0),
                   Column(
                     children: [
                       Text(
-                        'Max: ${showTemperature(state.weather.tempMax)}',
+                        'Max: ${showTemperature(state.weatherProperty.tempMaxWeather)}',
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        'Min: ${showTemperature(state.weather.tempMin)}',
+                        'Min: ${showTemperature(state.weatherProperty.tempMinWeather)}',
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ],
@@ -242,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Humidity: ${state.weather.humidity} %',
+                    'Humidity: ${state.weatherProperty.humidityWeather} %',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
@@ -254,7 +256,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Wind Speed: ${showWindSpeed(state.weather.speed)}',
+                    'Wind Speed: ${showWindSpeed(state.weatherProperty.speedWeather)}',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
@@ -266,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Wind Direction: ${showWindDirectionClass.showWindDirection(state.weather.deg)}',
+                    'Wind Direction: ${showWindDirectionClass.showWindDirection(state.weatherProperty.degWeather)}',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
@@ -283,10 +285,10 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Spacer(),
-                  showIcon(state.weather.icon),
+                  showIcon(state.weatherProperty.iconWeather),
                   Expanded(
                     flex: 3,
-                    child: formatText(state.weather.description),
+                    child: formatText(state.weatherProperty.descriptionWeather),
                   ),
                   Spacer(),
                 ],

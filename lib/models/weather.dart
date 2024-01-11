@@ -1,31 +1,31 @@
 import 'package:equatable/equatable.dart';
 
 class Weather extends Equatable {
-  final String description;
-  final String icon;
-  final double temp; //checked
-  final double tempMin;
-  final double tempMax;
-  final int pressure; //checked
-  final int humidity; //checked
-  final double speed;
-  final int deg;
-  final String name;
-  final String country;
-  final DateTime lastUpdated;
+  final String descriptionWeather;
+  final String iconWeather;
+  final double tempWeather; //checked
+  final double tempMinWeather;
+  final double tempMaxWeather;
+  final int pressureWeather; //checked
+  final int humidityWeather; //checked
+  final double speedWeather;
+  final int degWeather;
+  final String nameWeather;
+  final String countryWeather;
+  final DateTime lastUpdatedWeather;
   Weather({
-    required this.description,
-    required this.icon,
-    required this.temp,
-    required this.tempMin,
-    required this.tempMax,
-    required this.pressure,
-    required this.humidity,
-    required this.speed,
-    required this.deg,
-    required this.name,
-    required this.country,
-    required this.lastUpdated,
+    required this.descriptionWeather,
+    required this.iconWeather,
+    required this.tempWeather,
+    required this.tempMinWeather,
+    required this.tempMaxWeather,
+    required this.pressureWeather,
+    required this.humidityWeather,
+    required this.speedWeather,
+    required this.degWeather,
+    required this.nameWeather,
+    required this.countryWeather,
+    required this.lastUpdatedWeather,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) {
@@ -34,86 +34,86 @@ class Weather extends Equatable {
     final wind = json['wind'];
 
     return Weather(
-      description: weather['description'],
-      icon: weather['icon'],
-      temp: main['temp'],
-      tempMin: main['temp_min'],
-      tempMax: main['temp_max'],
-      pressure: main['pressure'],
-      humidity: main['humidity'],
-      speed: wind['speed'],
-      deg: wind['deg'],
-      name: '',
-      country: '',
-      lastUpdated: DateTime.now(),
+      descriptionWeather: weather['description'],
+      iconWeather: weather['icon'],
+      tempWeather: main['temp'],
+      tempMinWeather: main['temp_min'],
+      tempMaxWeather: main['temp_max'],
+      pressureWeather: main['pressure'],
+      humidityWeather: main['humidity'],
+      speedWeather: wind['speed'],
+      degWeather: wind['deg'],
+      nameWeather: '',
+      countryWeather: '',
+      lastUpdatedWeather: DateTime.now(),
     );
   }
 
   factory Weather.initial() => Weather(
-        description: '',
-        icon: '',
-        temp: 100.0,
-        tempMin: 100.0,
-        tempMax: 100.0,
-        pressure: 0,
-        humidity: 0,
-        speed: 0.0,
-        deg: 0,
-        name: '',
-        country: '',
-        lastUpdated: DateTime(1970),
+        descriptionWeather: '',
+        iconWeather: '',
+        tempWeather: 100.0,
+        tempMinWeather: 100.0,
+        tempMaxWeather: 100.0,
+        pressureWeather: 0,
+        humidityWeather: 0,
+        speedWeather: 0.0,
+        degWeather: 0,
+        nameWeather: '',
+        countryWeather: '',
+        lastUpdatedWeather: DateTime(1970),
       );
 
   @override
   List<Object> get props {
     return [
-      description,
-      icon,
-      temp,
-      tempMin,
-      tempMax,
-      pressure,
-      humidity,
-      speed,
-      deg,
-      name,
-      country,
-      lastUpdated,
+      descriptionWeather,
+      iconWeather,
+      tempWeather,
+      tempMinWeather,
+      tempMaxWeather,
+      pressureWeather,
+      humidityWeather,
+      speedWeather,
+      degWeather,
+      nameWeather,
+      countryWeather,
+      lastUpdatedWeather,
     ];
   }
 
   @override
   String toString() {
-    return 'Weather(description: $description, icon: $icon, temp: $temp, tempMin: $tempMin, tempMax: $tempMax, pressure: $pressure, humidity: $humidity,speed: $speed, deg: $deg, name: $name, country: $country, lastUpdated: $lastUpdated)';
+    return 'Weather(description: $descriptionWeather, icon: $iconWeather, temp: $tempWeather, tempMin: $tempMinWeather, tempMax: $tempMaxWeather, pressure: $pressureWeather, humidity: $humidityWeather,speed: $speedWeather, deg: $degWeather, name: $nameWeather, country: $countryWeather, lastUpdated: $lastUpdatedWeather)';
   }
 
   Weather copyWith({
-    String? description,
-    String? icon,
-    double? temp,
-    double? tempMin,
-    double? tempMax,
-    int? pressure,
-    int? humidity,
-    double? speed,
-    int? deg,
-    String? name,
-    String? country,
-    DateTime? lastUpdated,
+    String? descriptionWeather,
+    String? iconWeather,
+    double? tempWeather,
+    double? tempMinWeather,
+    double? tempMaxWeather,
+    int? pressureWeather,
+    int? humidityWeather,
+    double? speedWeather,
+    int? degWeather,
+    String? nameWeather,
+    String? countryWeather,
+    DateTime? lastUpdatedWeather,
   }) {
     return Weather(
-      description: description ?? this.description,
-      icon: icon ?? this.icon,
-      temp: temp ?? this.temp,
-      tempMin: tempMin ?? this.tempMin,
-      tempMax: tempMax ?? this.tempMax,
-      pressure: pressure ?? this.pressure,
-      humidity: humidity ?? this.humidity,
-      speed: speed ?? this.speed,
-      deg: deg ?? this.deg,
-      name: name ?? this.name,
-      country: country ?? this.country,
-      lastUpdated: lastUpdated ?? this.lastUpdated,
+      descriptionWeather: descriptionWeather ?? this.descriptionWeather,
+      iconWeather: iconWeather ?? this.iconWeather,
+      tempWeather: tempWeather ?? this.tempWeather,
+      tempMinWeather: tempMinWeather ?? this.tempMinWeather,
+      tempMaxWeather: tempMaxWeather ?? this.tempMaxWeather,
+      pressureWeather: pressureWeather ?? this.pressureWeather,
+      humidityWeather: humidityWeather ?? this.humidityWeather,
+      speedWeather: speedWeather ?? this.speedWeather,
+      degWeather: degWeather ?? this.degWeather,
+      nameWeather: nameWeather ?? this.nameWeather,
+      countryWeather: countryWeather ?? this.countryWeather,
+      lastUpdatedWeather: lastUpdatedWeather ?? this.lastUpdatedWeather,
     );
   }
 }

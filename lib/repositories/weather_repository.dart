@@ -17,15 +17,15 @@ class WeatherRepository {
       final Weather tempWeather = await weatherApiServices.getWeather(directGeocoding);
 
       final Weather weather = tempWeather.copyWith(
-        name: directGeocoding.name,
-        country: directGeocoding.country,
+        nameWeather: directGeocoding.nameProperty,
+        countryWeather: directGeocoding.countryProperty,
       );
 
       return weather;
     } on WeatherException catch (e) {
-      throw CustomError(errMsg: e.message);
+      throw CustomError(customErrorMessage: e.message); //message is in weather_exception.dart
     } catch (e) {
-      throw CustomError(errMsg: e.toString());
+      throw CustomError(customErrorMessage: e.toString());
     }
   }
 }

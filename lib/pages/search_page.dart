@@ -170,7 +170,7 @@ class _SearchPageState extends State<SearchPage> {
                     onPressed: getCurrentLatAndLon,
                     child: Text(
                       "Check Local Weather",
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
                 ),

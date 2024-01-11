@@ -1,14 +1,18 @@
 import 'package:equatable/equatable.dart';
 
 class CustomError extends Equatable {
-  final String errMsg;
+  final String customErrorMessage;
   CustomError({
-    this.errMsg = '',
+    this.customErrorMessage = '',
   });
 
   @override
-  List<Object> get props => [errMsg];
+  List<Object> get props => [customErrorMessage];
 
+/*
+The toString method is overridden to provide a string representation of the error when it 
+needs to be converted to a string.
+*/
   @override
-  String toString() => 'CustomError(errMsg: $errMsg)';
+  String toString() => 'CustomError(errMsg: $customErrorMessage)';
 }

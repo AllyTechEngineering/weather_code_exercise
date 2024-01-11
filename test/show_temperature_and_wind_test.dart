@@ -6,7 +6,7 @@ void main() {
   group('show temperature results in F and C and metric/imperial wind speed results', () {
     test('show temperature f results', () {
       //Arrange
-      var tempUnit = TempUnit.fahrenheit;
+      var tempUnit = TemperatureUnit.fahrenheitStatus;
       double temperature = 0.0;
       //Act
       String temperatureResults =
@@ -16,7 +16,7 @@ void main() {
     });
     test('show temperature c results', () {
       //Arrange
-      var tempUnit = TempUnit.celsius;
+      var tempUnit = TemperatureUnit.celsiusStatus;
       double temperature = 32.0;
       //Act
       String temperatureResults =
@@ -26,7 +26,7 @@ void main() {
     });
     test('show for input 1 the metric wind speed results', () {
       //Arrange
-      var tempUnit = TempUnit.celsius;
+      var tempUnit = TemperatureUnit.celsiusStatus;
       double windSpeed = 1.0;
       //Act
       String windSpeedResults =
@@ -36,7 +36,7 @@ void main() {
     });
     test('show for input 1 the knot wind speed results', () {
       //Arrange
-      var tempUnit = TempUnit.fahrenheit;
+      var tempUnit = TemperatureUnit.fahrenheitStatus;
       double windSpeed = 1.0;
       //Act
       String windSpeedResults =
@@ -46,7 +46,7 @@ void main() {
     });
     test('show for input 10 the metric wind speed results', () {
       //Arrange
-      var tempUnit = TempUnit.celsius;
+      var tempUnit = TemperatureUnit.celsiusStatus;
       double windSpeed = 10.0;
       //Act
       String windSpeedResults =
@@ -56,7 +56,7 @@ void main() {
     });
     test('show for input 10 the knot wind speed results', () {
       //Arrange
-      var tempUnit = TempUnit.fahrenheit;
+      var tempUnit = TemperatureUnit.fahrenheitStatus;
       double windSpeed = 10.0;
       //Act
       String windSpeedResults =

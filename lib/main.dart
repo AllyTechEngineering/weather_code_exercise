@@ -8,7 +8,7 @@ import 'package:open_weather_stream_bloc/utilities/app_theme_data_class.dart';
 import 'pages/home_page.dart';
 import 'repositories/weather_repository.dart';
 import 'services/weather_api_services.dart';
-import 'blocs/blocs.dart';
+import 'blocs/barrel_blocs.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');

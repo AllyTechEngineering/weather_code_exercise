@@ -42,8 +42,8 @@ class WeatherApiServices {
       final directGeocoding = DirectGeocoding.fromJson(responseBody);
 
       return directGeocoding;
-    } catch (e) {
-      debugPrint('Error: ${e.runtimeType}');
+    } catch (e, stackTrace) {
+      debugPrint('Error: ${e.runtimeType} stackTrace: $stackTrace');
       rethrow;
     }
   }
@@ -56,8 +56,8 @@ class WeatherApiServices {
       host: kApiHost,
       path: '/data/2.5/weather',
       queryParameters: {
-        'lat': '${directGeocoding.lat}',
-        'lon': '${directGeocoding.lon}',
+        'lat': '${directGeocoding.latProperty}',
+        'lon': '${directGeocoding.lonProperty}',
         'units': kUnit,
         'appid': dotenv.env['APPID'],
       },
@@ -77,7 +77,8 @@ class WeatherApiServices {
       final Weather weather = Weather.fromJson(weatherJson);
       debugPrint('This is the JSON response for weather: $weather');
       return weather;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('Error: ${e.runtimeType} stackTrace: $stackTrace');
       rethrow;
     }
   }
