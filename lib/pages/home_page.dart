@@ -38,10 +38,15 @@ class _HomePageState extends State<HomePage> {
               _city = await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return SearchPage();
+                  return SearchPage(); //_city is not handled by BLoC
                 }),
               );
               if (_city != null) {
+                // BlocListener, BlocBuilder or BlocConsumer are not needed.
+                // This interfaces directly with the WeatherBloc and does not rebuild the UI
+                // context.read is the extension method from the provider package to retrieve the instance of the WeatherBloc.
+                // The read method is used for reading (or obtaining) a reference to a provider without rebuilding the widget tree.
+                // .add is a new FetchWeatherEvent added to WeatherBloc to trigger on<FetchWeatherEvent>(_fetchWeather);
                 context.read<WeatherBloc>().add(FetchWeatherEvent(city: _city!));
               }
             },
@@ -74,6 +79,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   String showTemperature(double temperature) {
+    //context.watch<TempSettingsBloc>(): Here, the watch method from the provider package is used to listen for changes to the state of the TempSettingsBloc
+    // In BLoC, the state holds the data that represents the current state of the application.
+    // .temperatureUnit is the state of the TempSettingsBloc for C or F
     final tempUnit = context.watch<TempSettingsBloc>().state.temperatureUnit;
     return showTemperatureAndWindClass.showTemperatureResults(temperature, tempUnit);
   }

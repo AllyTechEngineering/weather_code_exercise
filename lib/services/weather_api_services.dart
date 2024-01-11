@@ -15,9 +15,10 @@ class WeatherApiServices {
   });
 
   Future<DirectGeocoding> getDirectGeocoding(String city) async {
+    //URI stands for Uniform Resource Identifier.
     final Uri uri = Uri(
       scheme: 'https',
-      host: kApiHost,
+      host: kApiHost, //in constant.dart file
       path: '/geo/1.0/direct',
       queryParameters: {
         'q': city,
@@ -25,7 +26,7 @@ class WeatherApiServices {
         'appid': dotenv.env['APPID'],
       },
     );
-
+    debugPrint('URI = $uri');
     try {
       final http.Response response = await httpClient.get(uri);
 

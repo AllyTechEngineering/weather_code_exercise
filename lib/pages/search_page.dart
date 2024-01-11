@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:open_weather_stream_bloc/repositories/weather_repository.dart';
+// import 'package:open_weather_stream_bloc/repositories/weather_repository.dart';
 import '../utilities/constants.dart';
 
 class SearchPage extends StatefulWidget {
@@ -73,18 +73,18 @@ class _SearchPageState extends State<SearchPage> {
                       color: Colors.white,
                       size: 20.0,
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                        bottomLeft: Radius.circular(20.0),
-                        bottomRight: Radius.circular(20.0),
-                      ),
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 10.0,
-                      ),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.only(
+                    //     topLeft: Radius.circular(20.0),
+                    //     topRight: Radius.circular(20.0),
+                    //     bottomLeft: Radius.circular(20.0),
+                    //     bottomRight: Radius.circular(20.0),
+                    //   ),
+                    //   borderSide: BorderSide(
+                    //     color: Colors.white,
+                    //     width: 10.0,
+                    //   ),
+                    // ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
@@ -170,7 +170,7 @@ class _SearchPageState extends State<SearchPage> {
                     onPressed: getCurrentLatAndLon,
                     child: Text(
                       "Check Local Weather",
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
                 ),
@@ -214,9 +214,6 @@ class _SearchPageState extends State<SearchPage> {
       return false;
     }
     permission = await Geolocator.checkPermission();
-    // new code to stop from asking permission over and over again
-    // permission != LocationPermission.always
-    // if (permission != LocationPermission.always) {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
@@ -231,8 +228,6 @@ class _SearchPageState extends State<SearchPage> {
               Text('Location permissions are permanently denied, we cannot request permissions.')));
       return false;
     }
-    // }
-
     return true;
   }
 
@@ -241,14 +236,6 @@ class _SearchPageState extends State<SearchPage> {
     if (!hasPermission) return;
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
-      // debugPrint('position = ${position.longitude}');
-      // debugPrint('position = ${position.latitude}');
-      // _positionResults = position;
-      double _lat = position.latitude;
-      double _lon = position.longitude;
-      //_latAndLonList[0] = _lat;
-      // _latAndLonList[0] = _lon;
-      //Navigator.pop(context, position);
       setState(() => _currentPosition = position);
       _getAddressFromLatLng(_currentPosition!);
     }).catchError((e) {
@@ -257,7 +244,6 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Future<void> _getAddressFromLatLng(Position position) async {
-    // debugPrint('In Geocoder which has request limits');
     await placemarkFromCoordinates(_currentPosition!.latitude, _currentPosition!.longitude)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
