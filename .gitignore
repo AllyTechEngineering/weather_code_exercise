@@ -1,5 +1,6 @@
 # Miscellaneous
 *.class
+*.env
 *.log
 *.pyc
 *.swp
@@ -31,6 +32,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+
 
 # Web related
 lib/generated_plugin_registrant.dart
